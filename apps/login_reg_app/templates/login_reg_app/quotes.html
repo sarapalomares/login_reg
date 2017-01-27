@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+      <head>
+            <meta charset="utf-8">
+            <title>Quotes</title>
+      </head>
+      <body>
+            <h1>Welcome, {{request.session.user.first_name}}!</h1>
+            <div id="quotable_quotes">
+                  <table>
+                        <tr>
+                              <th><u>Quotable Quotes</u></th>
+                              <th><u>Actions</u></th>
+                        </tr>
+                        <!-- for quotes in quotes? -->
+                        <tr>
+                              <td>{{quotes.name}}</td>
+                              <td>
+                                    <form method="get" action="/">
+                                          <button type="submit">Add to My List</button>
+                              </form>
+                              </td>
+                        </tr>
+                  </table>
+            </div>
+            <p><div id="favorites"></p>
+                  <table>
+                        <tr>
+                              <th><u>Your Favorites</u></th>
+                              <th><u>Actions</u></th>
+                        </tr>
+                        <!-- for favorites in favorites? -->
+                        <tr>
+                              <td>{{favorites.name}}</td>
+                              <td>
+                                    <form method="get" action="/">
+                                          <button type="submit">Remove From My List</button>
+                              </form>
+                        </tr>
+                  </table>
+            </div>
+            <p><div id="contribute"></p>
+                  <h4><u>Contribute a Quote:</u></h4>
+                  <form action="/" method="post">
+                        {% csrf_token %}
+                        Quoted By: <input type="text" name="quoted_by">
+                        <p>Message:</p>
+                        <p><textarea name="quotedby_msg" rows="8" cols="40"></textarea></p>
+                        <p><input type="submit" value="Submit"></p>
+                  </form>
+            </div>
+      </body>
+</html>

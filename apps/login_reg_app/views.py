@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import User
 
-# Create your views here.
 def index(request):
     return render(request, "login_reg_app/index.html")
 
@@ -16,10 +15,10 @@ def registration(request):
 
     return log_user_in(request, result[1])
 
-def success(request):
+def quotes(request):
     if not 'user' in request.session:
-        return redirect(reverse('index'))
-    return render(request, 'login_reg_app/success.html')
+        return redirect('/')
+    return render(request, 'login_reg_app/quotes.html')
 
 def login(request):
     result = User.objects.validateLogin(request)
@@ -38,4 +37,13 @@ def log_user_in(request, user):
         'last_name' : user.last_name,
         'email' : user.email,
     }
-    return render(request, 'login_reg_app/success.html')
+    return render(request, 'login_reg_app/quotes.html')
+
+# def contribute(request):
+#     if not check_logged_in(request):
+#         return redirect('/')
+#
+#     result = Quotes.objects.contribute(request.POST, request.session['user']['id'])
+#
+#     if result[0] == True:
+#         return redirect(request, '/quotes.html')
